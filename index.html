@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RunOpsLine</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <script defer type="module" src="githubAuth.js"></script>
+    <script type="module">
+        import * as MyFn from "./githubauth.js"
+        MyFn.reloadData();
+        window.reloadDomData = MyFn.reloadData;
+        window.reloadDomWorkflows = MyFn.reloadWorkflows;
+        window.runPipelineDom = MyFn.runPipeline;
+    </script>
+    <script>
+        function showWord(rolSelector) {
+            document.querySelector("#rolSelector").innerHTML=rolSelector
+        } 
+
+        function executePipeline(rolItem) {
+            document.querySelector("#rolSelector").innerHTML=rolItem
+        } 
+    </script>
+</head>
+
+<body>
+
+    <header>
+        <h1>RunOpsLine</h1>
+        <img src="ROL.png" alt="https://maxks.org/RunOpsLine" width="360" height="142">
+    </header>
+    <!-- Version -->
+    <p>using github</p>
+
+    <a href="#"><span onclick="reloadDomData()">reload repos</span></a>
+    <a href="#"><span onclick="reloadDomWorkflows()">reload worflows</span></a>
+    <nav>
+        <a href="#"><span onclick="showWord('runs')">runs</span></a>
+        <a href="#"><span onclick="showWord('ops')">ops</span></a>
+        <a href="#"><span onclick="showWord('pipelines')">pipelines</span></a>
+    </nav>
+
+    <h2 id="rolSelector">runs</h2>
+    <div id="rolView">
+        <p id="rolItems"></p>
+    </div>
+
+
+</body>
+
+<footer>
+    <a href="https://maxks.org">maxksorg</a>
+</footer>
+</html>
