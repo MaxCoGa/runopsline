@@ -1,15 +1,14 @@
-nvm
-npm
+# RunOpsLine
+## requirements
+ - nvm 
+ - npm
 
-npm create svelte@latest runopsline
-  1: cd runopsline
-  2: npm install
-  3: git init && git add -A && git commit -m "Initial commit" (optional)
-  4: npm run dev -- --open
-npm i
-npm run dev
+## local run
+ 1. cd runopsline
+ 2. npm i
+ 3. npm run dev
 
-
-
-npm add -D @sveltejs/adapter-static
-npm install octokit 
+## build setup
+ 1. npm create svelte@latest runopsline
+ 2. npm add -D @sveltejs/adapter-static
+ 3. npm install octokit
