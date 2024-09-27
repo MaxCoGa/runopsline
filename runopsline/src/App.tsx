@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom/client';
+import { useState } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
-import { hydrateRoot } from 'react-dom/client';
 
 import Layout from "./components/Layout";
 import Home from "./components/Home";
@@ -24,14 +22,6 @@ var GITHUB_PAT = "github_pat_TOKEN";
 var octokit = new Octokit({
   auth: GITHUB_PAT
 })
-
-// export function setGithubPAT(gpat){
-//   GITHUB_PAT = document.getElementById('TokenInput').value; 
-//   let test : string = <HTMLInputElement>document.getElementById(TokenInput).value;
-//   octokit = new Octokit({
-//       auth: GITHUB_PAT
-//   })
-// }
 
 const TestFunction = () => {
   console.log("=====TEST=====")
@@ -62,10 +52,6 @@ async function listBranches(owner: any,repo: any) {
 
 async function getGitHubRepoWorkflows(repoData: { owner: { login: string; }; name: string; default_branch: string; }) {
 
-  // data[0].name -> repo name
-  // data[0].owner.login -> owner name
-  // console.log("========");
-  // console.log(repoData.name);
   const pipeline = await octokit.request('GET /repos/{owner}/{repo}/actions/workflows', {
       owner: repoData.owner.login,
       repo: repoData.name,
@@ -73,10 +59,8 @@ async function getGitHubRepoWorkflows(repoData: { owner: { login: string; }; nam
         'X-GitHub-Api-Version': '2022-11-28'
       }
   });
-  // console.log(pipeline);
 
   if (pipeline.data.total_count > 0){
-      // GIT_WORKFLOWS.push(pipeline);
       console.log("========");
       console.log(repoData.name);
 
@@ -97,21 +81,6 @@ async function getGitHubRepoWorkflows(repoData: { owner: { login: string; }; nam
             repo_name: repoData.name
           }
           GIT_WORKFLOWS.push(workflowData);
-          console.log(element.name);
-          console.log(element.id);
-          console.log(repoData.default_branch);
-          // let myRow = document.querySelector("#rolItems");
-          // (myRow as InnerHTML).innerHTML+= repoData.name + ": " + element.name + "(" +  element.id + ")" 
-          // + ' <a href="#"><span onclick="showWord('+"'run'"+')">run</span></a>' 
-          // + ' <a href="#"><span onclick="showWord('+"'view'"+')">view</span></a>' 
-          // + ' <a href="#"><span onclick="runPipeline('+ "'"+repoData.owner.login+"'," + "'"+repoData.name+"'," + "'"+element.id+"'," + "'"+repoData.default_branch+"'," +')">RUN</span></a>' 
-          // + "<br/>";
-
-          // console.log(document.getElementById("rolItems"));
-          // let myRow2 = document.getElementById("rolItems");
-          // hydrateRoot(myRow2 as HTMLElement, <WORKFLOW_ROW repoData={repoData} element={element} />);
-          // (myRow as InnerHTML).innerHTML+= <WORKFLOW_ROW repoData={repoData} element={element} />
-          
       });
   
       const runAttemps = await octokit.request('GET /repos/{owner}/{repo}/actions/runs', {
@@ -168,41 +137,28 @@ async function reloadData() {
 
   try {
     const data = await getPaginatedData(octokit,"/user/repos");
-    return console.log(data); // <-- what the function currently returns
+    return console.log(data);
   } catch (error) {
-      return console.log(error); // <-- you may want "error.message" here.
+      return console.log(error); 
   }   
 };
 
 async function reloadWorkflows() {
-
-
-
   try {
     const data = await getPaginatedData(octokit,"/user/repos");
 
-    // GIT_REPOS = data;
     GIT_REPOS.push(data);
     for (const element of data) {
         await getGitHubRepoWorkflows(element);
-
-        
-        // document.querySelector("#rolItems").innerHTML=element;
-        
     }
     
-    return console.log(data); // <-- what the function currently returns
+    return console.log(data);
   } catch (error) {
-      return console.log(error); // <-- you may want "error.message" here.
+      return console.log(error);
   }   
 
 
 };
-
-function showWord(rolSelector: string) {
-  let myRow = document.querySelector("#rolSelector");
-  (myRow as InnerHTML).innerHTML=rolSelector;
-} 
 
 function executePipeline(rolItem: string) {
   let myRow = document.querySelector("#rolSelector");
@@ -232,7 +188,6 @@ function TEST_BUTTON() {
   return (
     <>
       <button onClick={() => {
-        // showWord("TEST");
         TestFunction();
       }}>
         TEST
