@@ -1,8 +1,25 @@
+function WORKFLOW_ROW(props: any) {
+
+  // console.log(props.repo);
+  return (
+    <>
+      <tr>
+        <th scope="row">
+        {props.workflow.name}
+        </th>
+        <td>VIEW</td>
+        <td>CANCEL</td>
+        <td>EXECUTE</td>
+      </tr>
+    </>
+  );
+}
+
 const Pipelines = (props: any) => {
-  // console.log(props.GIT_REPOS[0].length);
+  // console.log(props.WORKFLOWS[0].length);
 
 
-  if(props.GIT_REPOS.length === 0){
+  if(props.WORKFLOWS.length === 0){
     return (
       <>
         <h1>Pipelines</h1>
@@ -18,7 +35,7 @@ const Pipelines = (props: any) => {
           </thead>
           {/* <tbody>
             <tr>
-              <th scope="row">{props.GIT_REPOS[0][0].name}</th>
+              <th scope="row">{props.WORKFLOWS[0][0].name}</th>
               <td>HTML tables</td>
             </tr>
           </tbody> */}
@@ -34,8 +51,6 @@ const Pipelines = (props: any) => {
     );
   }
 
-  console.log(props.GIT_REPOS[0].length);
-
   return (
     <>
       <h1>Pipelines</h1>
@@ -50,15 +65,23 @@ const Pipelines = (props: any) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">{props.GIT_REPOS[0][0].name}</th>
-            <td>HTML tables</td>
-          </tr>
+          {/* <tr> */}
+            {/* <th scope="row"> */}
+              {
+              props.WORKFLOWS.map((workflow: { id: any; }) => (
+                // {repoData.name} : {element.name} ({element.id})
+                <WORKFLOW_ROW workflow={workflow} key={workflow.id}/>
+              
+              ))
+              }
+            {/* </th>
+            <td>HTML tables</td> */}
+          {/* </tr> */}
         </tbody>
         <tfoot>
           <tr>
             <th scope="row">Number of workflows</th>
-            <td>{props.GIT_REPOS[0].length}</td>
+            <td>{props.WORKFLOWS[0].length}</td>
           </tr>
         </tfoot>
       </table>

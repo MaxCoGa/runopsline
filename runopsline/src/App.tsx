@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import Run from './components/Run';
 import Ops from './components/Ops';
 import Pipelines from './components/Pipelines';
+import Repos from './components/Repos';
 import Misc from "./components/Misc";
 import NoPage from "./components/NoPage";
 
@@ -72,11 +73,10 @@ async function getGitHubRepoWorkflows(repoData: { owner: { login: string; }; nam
         'X-GitHub-Api-Version': '2022-11-28'
       }
   });
-  GIT_WORKFLOWS.push(pipeline);
   // console.log(pipeline);
 
   if (pipeline.data.total_count > 0){
-
+      // GIT_WORKFLOWS.push(pipeline);
       console.log("========");
       console.log(repoData.name);
 
@@ -89,6 +89,14 @@ async function getGitHubRepoWorkflows(repoData: { owner: { login: string; }; nam
       });
 
       await pipeline.data.workflows.forEach((element: { name: string; id: string; }) => {
+          const workflowData = {
+            name: element.name,
+            id: element.id,
+            default_branch: repoData.default_branch,
+            owner: repoData.owner.login,
+            repo_name: repoData.name
+          }
+          GIT_WORKFLOWS.push(workflowData);
           console.log(element.name);
           console.log(element.id);
           console.log(repoData.default_branch);
@@ -233,51 +241,6 @@ function TEST_BUTTON() {
   );
 }
 
-function WORKFLOW_ROW(props: any) {
-
-return (
-  <>
-    <li id={props.fruit.id}>{props.fruit.name}</li>
-  </>
-);
-}
-
-function WORKFLOW_ROWS() {
-
-    // const workflows = props.workflows;
-    // const repoData = props.repoData;
-
-    const fruits = [
-      { name: "apple", id: "test"},
-      { name: "orange", id: "test2"}
-    ]
-
-  return (
-    <>
-      {GIT_REPOS.map((fruit) => (
-        // {repoData.name} : {element.name} ({element.id})
-        <WORKFLOW_ROW fruit={fruit} key={fruit.id}/>
-      
-      ))}
-      
-          {/* {props.repoData.name} : {props.element.name} ({props.element.id})
-          <a href="#"><span onClick={() => {
-            showWord("run");
-          }}>run</span></a>
-
-          <a href="#"><span onClick={() => {
-            showWord("view");
-          }}>view</span></a>
-
-          <a href="#"><span onClick={() => {
-            runPipeline(props.repoData.owner.login, props.repoData.name, props.element.id, props.repoData.default_branch, "" );
-          }}>run</span></a>
-          <br/> */}
-    </>
-  );
-}
-
-
 function RELOAD_REPOS_BUTTON() {
   return (
     <>
@@ -348,7 +311,8 @@ const Main = () => (
           <Route index element={<Home />} />
           <Route path="run" element={<Run />} />
           <Route path="ops" element={<Ops />} />
-          <Route path="pipelines" element={<Pipelines GIT_REPOS={GIT_REPOS}/>} />
+          <Route path="pipelines" element={<Pipelines WORKFLOWS={GIT_WORKFLOWS}/>} />
+          <Route path="repos" element={<Repos  GIT_REPOS={GIT_REPOS}/>} />
           <Route path="misc" element={<Misc />} />
           <Route path="*" element={<NoPage />} />
         </Route>

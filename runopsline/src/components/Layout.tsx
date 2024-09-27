@@ -18,6 +18,9 @@ const Layout = () => {
             <Link to="/pipelines">pipelines</Link>
           </li>
           <li>
+            <Link to="/repos">repos</Link>
+          </li>
+          <li>
             <Link to="/misc">misc</Link>
           </li>
         </ul>
