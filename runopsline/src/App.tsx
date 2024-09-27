@@ -216,7 +216,7 @@ export default App;
 const Main = () => (
 	<BrowserRouter>
 		<Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/runopsline/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="run" element={<Run GIT_REPOS={GIT_REPOS} />} />
           <Route path="ops" element={<Ops GIT_REPOS={GIT_REPOS} />} />

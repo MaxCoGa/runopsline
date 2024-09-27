@@ -6,22 +6,22 @@ const Layout = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/runopsline">Home</Link>
           </li>
           <li>
-            <Link to="/run">run</Link>
+            <Link to="/runopsline/run">run</Link>
           </li>
           <li>
-            <Link to="/ops">ops</Link>
+            <Link to="/runopsline/ops">ops</Link>
           </li>
           <li>
-            <Link to="/pipelines">pipelines</Link>
+            <Link to="/runopsline/pipelines">pipelines</Link>
           </li>
           <li>
-            <Link to="/repos">repos</Link>
+            <Link to="/runopsline/repos">repos</Link>
           </li>
           <li>
-            <Link to="/misc">misc</Link>
+            <Link to="/runopsline/misc">misc</Link>
           </li>
         </ul>
       </nav>
