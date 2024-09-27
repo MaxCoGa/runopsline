@@ -101,38 +101,6 @@ async function getGitHubRepoWorkflows(repoData: { owner: { login: string; }; nam
   }
 }
 
-async function runPipeline(owner: any,repo: any,pipeId: any,ref: any,inputs: any) {
-
-  const response = await octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
-      owner: owner,
-      repo: repo,
-      workflow_id: pipeId,
-      ref: ref,
-      // inputs: {
-      //   name: 'Mona the Octocat',
-      //   home: 'San Francisco, CA'
-      // },
-      headers: {
-        'X-GitHub-Api-Version': '2022-11-28'
-      }
-  });
-
-  // console.log(response); // should be 204
-};
-
-async function cancelPipeline(owner: any,repo: any,runId: any,ref: any,inputs: any) {
-
-  await octokit.request('POST /repos/{owner}/{repo}/actions/runs/{run_id}/force-cancel', {
-      owner: owner,
-      repo: repo,
-      run_id: runId,
-      headers: {
-        'X-GitHub-Api-Version': '2022-11-28'
-      }
-  });
-
-};
-
 async function reloadData() {
 
   try {
@@ -159,11 +127,6 @@ async function reloadWorkflows() {
 
 
 };
-
-function executePipeline(rolItem: string) {
-  let myRow = document.querySelector("#rolSelector");
-  (myRow as InnerHTML).innerHTML=rolItem;
-} 
 
 function GITHUB_PAT_FORM() {
   const [formInput, setGithubPAT] = useState(GITHUB_PAT); // Declare a state variable...
@@ -266,8 +229,8 @@ const Main = () => (
           <Route index element={<Home />} />
           <Route path="run" element={<Run />} />
           <Route path="ops" element={<Ops />} />
-          <Route path="pipelines" element={<Pipelines WORKFLOWS={GIT_WORKFLOWS}/>} />
-          <Route path="repos" element={<Repos  GIT_REPOS={GIT_REPOS}/>} />
+          <Route path="pipelines" element={<Pipelines WORKFLOWS={GIT_WORKFLOWS} octokit={octokit} />} />
+          <Route path="repos" element={<Repos  GIT_REPOS={GIT_REPOS} />} />
           <Route path="misc" element={<Misc />} />
           <Route path="*" element={<NoPage />} />
         </Route>
