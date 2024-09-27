@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/runopsline/static/css/main.f855e6bc.css",
+    "main.js": "/runopsline/static/js/main.ab703916.js",
+    "static/js/453.7253ffec.chunk.js": "/runopsline/static/js/453.7253ffec.chunk.js",
+    "index.html": "/runopsline/index.html",
+    "main.f855e6bc.css.map": "/runopsline/static/css/main.f855e6bc.css.map",
+    "main.ab703916.js.map": "/runopsline/static/js/main.ab703916.js.map",
+    "453.7253ffec.chunk.js.map": "/runopsline/static/js/453.7253ffec.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.ab703916.js"
+  ]
+}
