@@ -195,22 +195,13 @@ function App() {
         Using GitHub
       </p>
 
-      {/* <Layout/> */}
-      <Main/>
-
-      {/* <input type="text" id="TokenInput" defaultValue={GITHUB_PAT}></input> */}
-
       <GITHUB_PAT_FORM/>
       <TEST_BUTTON/>
       <RELOAD_REPOS_BUTTON/>
       <RELOAD_WORKFLOWS_BUTTON/>
 
-      <h2 id="rolSelector">runs</h2>
-      <div id="rolView">
-        <p id="rolItems">
-          {/* <WORKFLOW_ROWS/> */}
-        </p>
-      </div>
+      {/* <Layout/> */}
+      <Main/>
 
     <footer>
       <a href="https://maxks.org">maxksorg</a>
@@ -227,10 +218,10 @@ const Main = () => (
 		<Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="run" element={<Run />} />
-          <Route path="ops" element={<Ops />} />
+          <Route path="run" element={<Run GIT_REPOS={GIT_REPOS} />} />
+          <Route path="ops" element={<Ops GIT_REPOS={GIT_REPOS} />} />
           <Route path="pipelines" element={<Pipelines WORKFLOWS={GIT_WORKFLOWS} octokit={octokit} />} />
-          <Route path="repos" element={<Repos  GIT_REPOS={GIT_REPOS} />} />
+          <Route path="repos" element={<Repos GIT_REPOS={GIT_REPOS} />} />
           <Route path="misc" element={<Misc />} />
           <Route path="*" element={<NoPage />} />
         </Route>

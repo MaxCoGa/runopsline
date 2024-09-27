@@ -11,7 +11,7 @@ function WORKFLOW_ROW(props: any) {
     );
   }
   
-  const Repos = (props: any) => {
+const Repos = (props: any) => {
     // console.log(props.GIT_REPOS[0].length);
   
   
@@ -84,6 +84,6 @@ function WORKFLOW_ROW(props: any) {
       </>
     
     );
-    };
+};
     
   export default Repos;

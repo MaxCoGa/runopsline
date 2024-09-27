@@ -135,6 +135,6 @@ const Pipelines = (props: any) => {
     </>
   
   );
-  };
+};
   
 export default Pipelines;
