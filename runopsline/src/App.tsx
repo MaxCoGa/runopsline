@@ -259,7 +259,7 @@ function RELOAD_WORKFLOWS_BUTTON() {
       <button onClick={() => {
         reloadWorkflows();
       }}>
-        reaload workflows
+        reload workflows
       </button>
     </>
   );
