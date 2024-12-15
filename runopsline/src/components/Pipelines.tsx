@@ -1,3 +1,8 @@
+async function viewPipeline(octokit: any,owner: any,repo: any,pipeId: any,ref: any,inputs: any) {
+
+  console.log("VIEW"); // should be 204
+};
+
 async function runPipeline(octokit: any,owner: any,repo: any,pipeId: any,ref: any,inputs: any) {
 
   const response = await octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
@@ -40,12 +45,17 @@ function WORKFLOW_ROW(props: any) {
     <>
       <tr>
         <th scope="row">
-        {props.workflow.name}
+        {props.workflow.name} : {props.workflow.repo_name}
         </th>
         <td>VIEW</td>
         <td>CANCEL</td>
         <td>EXECUTE</td>
         <td>
+        <button onClick={() => {
+              viewPipeline(props.octokit, props.workflow.owner, props.workflow.repo_name, "TODO", props.workflow.default_branch, "" );
+        }}>
+          view
+        </button>
         <button onClick={() => {
               cancelPipeline(props.octokit, props.workflow.owner, props.workflow.repo_name, "TODO", props.workflow.default_branch, "" );
         }}>

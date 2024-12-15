@@ -6,7 +6,7 @@
 ## local run
  1. cd runopsline
  2. npm i
- 3. npm run dev
+ 3. npm start
 
 ## build from scracht
 1. npx create-react-app runopsline --template typescript
