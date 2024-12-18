@@ -19,6 +19,14 @@ import { Octokit } from "octokit";
 var GITHUB_PAT = "github_pat_TOKEN";
 
 // https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api?apiVersion=2022-11-28
+// https://github.com/settings/tokens/new?scopes=repo
+// Compare: https://docs.github.com/en/rest/reference/users#get-the-authenticated-user
+// const {
+//   data: { login },
+// } = await octokit.rest.users.getAuthenticated();
+// console.log("Hello, %s", login);
+// const { data } = await octokit.request("/user");
+// check permission https://github.com/octokit/auth-token.js
 var octokit = new Octokit({
   auth: GITHUB_PAT
 })
@@ -141,7 +149,7 @@ function GITHUB_PAT_FORM() {
         // onChange={e => setGithubPAT(e.target.value)} // ... and update the state variable on any edits!
         onChange={e => setGithubPAT(e.target.value)} // ... and update the state variable on any edits!
       />
-      {GITHUB_PAT}
+      {/* {GITHUB_PAT} */}
     </>
   );
 }
@@ -190,6 +198,12 @@ function App() {
       <header>
         <h1>RUNOPSLINE</h1>
       </header>
+
+      {/* TODO: add correct permission to generate tokens link*/}
+      <p>
+        Generate tokens?
+        <a target="_blank" rel="noreferrer" href="https://github.com/settings/tokens/new?scopes=repo"> Click here</a>
+      </p>
 
       <p>
         Using GitHub
